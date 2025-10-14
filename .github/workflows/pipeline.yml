@@ -37,16 +37,19 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
-      - name: Bucket name
-        run: |
-              cd infra
-              echo "BUCKET_NAME=$(terraform output -raw bucket_name | tr -d '\r')" >> $GITHUB_ENV
+      - name: Set Bucket name
+        id: bucket
+        run: echo "BUCKET_NAME=$(terraform output -raw bucket_name)" 
+        
+      - name: Export bucket to env
+        run: echo "BUCKET_NAME=${{ steps.bucket.outputs.BUCKET_NAME }}" >> $GITHUB_ENV
 
       - name: IP EC2
         id: ec2_ip
         run: |
           cd infra
-          echo "EC2_PUBLIC_IP=$(terraform output -raw ec2_public_ip | tr -d '\r')" >> $GITHUB_ENV
+          IP=$(terraform output -raw ec2_public_ip | tr -d '[:space:]')
+          echo "EC2_PUBLIC_IP=$IP" >> $GITHUB_ENV
 
       - name: Gerar inventory
         run: |
