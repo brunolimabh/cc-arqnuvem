@@ -24,7 +24,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.6.0
-          
+
       - name: Terraform Apply
         run: |
           cd infra
@@ -32,6 +32,8 @@ jobs:
           terraform apply -auto-approve
 
       - name: Configurar EC2 com Ansible
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
         run: |
           cd ansible
           ansible-playbook -i inventory setup.yml
