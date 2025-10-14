@@ -5,5 +5,5 @@ variable "aws_region" {
 
 variable "bucket_name" {
   type        = string
-  default     = "lab-sprint5-arqnuvem-8913773839931"
+  default     = "lab-sprint5-arqnuvem--${timestamp()}"
 }
