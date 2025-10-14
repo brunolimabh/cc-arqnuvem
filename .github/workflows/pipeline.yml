@@ -37,7 +37,13 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
-      - name: Capturar IP público da EC2
+      - name: Bucket name
+        run: |
+          cd infra
+          BUCKET_NAME=$(terraform output -raw bucket_name | tr -d '[:space:]')
+          echo "BUCKET_NAME=$BUCKET_NAME" >> $GITHUB_ENV
+
+      - name: IP EC2
         id: ec2_ip
         run: |
           cd infra
@@ -61,13 +67,6 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip
           python3 -m pip install boto3 pandas
-
-      - name: Bucket name
-        id: bucket
-        run: |
-          cd infra
-          echo "BUCKET_NAME=$(terraform output -raw bucket_name)" >> $GITHUB_ENV
-
 
       - name: Executar pipeline de dados
         run: |
