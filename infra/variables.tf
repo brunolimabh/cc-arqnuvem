@@ -1,6 +1,9 @@
 variable "aws_region" {
- default = "us-east-1"
+  type        = string
+  default     = "us-east-1"
 }
+
 variable "bucket_name" {
- default = "lab-sprint5-arqnuvem"
+  type        = string
+  default     = "lab-sprint5-arqnuvem"
 }
