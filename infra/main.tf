@@ -1,9 +1,13 @@
 provider "aws" {
-  region = var.aws_region
+  region = "us-east-1"
+}
+
+resource "random_id" "bucket_suffix" {
+  byte_length = 4   # 4 bytes = 8 caracteres hexadecimais
 }
 
 resource "aws_s3_bucket" "lab" {
-  bucket = var.bucket_name
+  bucket = "lab-sprint5-arqnuvem-${random_id.bucket_suffix.hex}"
 }
 
 resource "aws_s3_bucket_versioning" "versioning" {
