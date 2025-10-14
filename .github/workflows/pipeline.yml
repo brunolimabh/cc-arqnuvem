@@ -66,8 +66,7 @@ jobs:
         id: bucket
         run: |
           cd infra
-          BUCKET=$(terraform output -raw bucket_name | tr -d '[:space:]')
-          echo "BUCKET_NAME=$BUCKET" >> $GITHUB_ENV
+          echo "BUCKET_NAME=$(terraform output -raw bucket_name)" >> $GITHUB_ENV
 
 
       - name: Executar pipeline de dados
