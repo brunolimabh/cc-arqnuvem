@@ -7,7 +7,7 @@ resource "random_id" "bucket_suffix" {
 }
 
 resource "aws_s3_bucket" "lab" {
-  bucket = "lab-sprint5-arqnuvem-12345"
+  bucket = "lab-sprint5-arqnuvem-asijdh"
 }
 
 resource "aws_s3_bucket_versioning" "versioning" {
