@@ -20,6 +20,12 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Criar chave SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AWS_SSH_KEY }}" > ~/.ssh/control-node-sprint5.pem
+          chmod 400 ~/.ssh/control-node-sprint5.pem
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
