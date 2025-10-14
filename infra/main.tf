@@ -23,6 +23,12 @@ resource "aws_instance" "app_server" {
   instance_type = "t2.micro"
   key_name      = "control-node-sprint5"
 
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo yum update -y
+              sudo yum install -y python3 python3-pip
+              EOF
+              
   tags = {
     Name = "Sprint5-EC2"
   }
