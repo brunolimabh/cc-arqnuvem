@@ -39,16 +39,14 @@ jobs:
 
       - name: Bucket name
         run: |
-          cd infra
-          BUCKET_NAME=$(terraform output -raw bucket_name | tr -d '[:space:]')
-          echo "BUCKET_NAME=$BUCKET_NAME" >> $GITHUB_ENV
+              cd infra
+              echo "BUCKET_NAME=$(terraform output -raw bucket_name | tr -d '\r')" >> $GITHUB_ENV
 
       - name: IP EC2
         id: ec2_ip
         run: |
           cd infra
-          IP=$(terraform output -raw ec2_public_ip | tr -d '[:space:]')
-          echo "EC2_PUBLIC_IP=$IP" >> $GITHUB_ENV
+          echo "EC2_PUBLIC_IP=$(terraform output -raw ec2_public_ip | tr -d '\r')" >> $GITHUB_ENV
 
       - name: Gerar inventory
         run: |
