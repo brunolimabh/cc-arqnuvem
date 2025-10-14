@@ -1,5 +1,5 @@
 import boto3, pandas as pd, os
-bucket = "lab-sprint5-arqnuvem"
+bucket = "lab-sprint5-arqnuvem-asijdh"
 s3 = boto3.client("s3")
 local = "data/sales.csv"
 # RAW
