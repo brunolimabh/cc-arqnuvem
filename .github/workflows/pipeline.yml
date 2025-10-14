@@ -43,7 +43,7 @@ jobs:
           cd infra
           IP=$(terraform output -raw ec2_public_ip | tr -d '[:space:]')
           echo "EC2_PUBLIC_IP=$IP" >> $GITHUB_ENV
-          
+
       - name: Gerar inventory
         run: |
           mkdir -p ansible
@@ -56,6 +56,11 @@ jobs:
         run: |
           cd ansible
           ansible-playbook -i inventory setup.yml
+
+      - name: Instalar dependências Python
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install boto3 pandas
 
       - name: Executar pipeline de dados
         run: |
